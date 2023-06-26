@@ -1,0 +1,25 @@
+<div class="dropdown-container">
+  <div class="dropdown-search">
+    <input type="text" #searchInput
+      class="dropdown-input"
+      [formControl]="filter"
+      [placeholder]="placeholder"
+      (focus)="onOpen(filter.value)"
+      (blur)="onBlur()"
+    >
+  </div>
+    <div class="dropdown-list shadowed" *ngIf="open">
+        <div class="dropdown-item"
+          *ngFor="let option of (filteredOptions$ | async); index as i"
+          (mousedown)="selectOption(option)"
+        >
+          <ng-container
+            [ngTemplateOutlet]="optionTemplateRef || defaultOptionTemplate"
+            [ngTemplateOutletContext]="{ $implicit: option, index: i, searchText: filter.value}"
+          ></ng-container>
+          <ng-template #defaultOptionTemplate>
+            <span [innerHTML]="(!!keyLabel ? option[keyLabel!] : option) | markText:filter.value ??''"></span>
+          </ng-template>
+        </div>
+    </div>
+</div>

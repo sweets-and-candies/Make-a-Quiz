@@ -1,0 +1,24 @@
+.dropdown-container {
+  position: relative;
+  display: inline-flex;
+}
+
+.dropdown-container .dropdown-list {
+  position: absolute;
+  top: 100%;
+  z-index: 1000;
+  background-color: #fff;
+  left: calc(var(--universal-margin) / 2);
+  right: auto;
+  min-width: calc(100% - var(--universal-margin));
+}
+
+.dropdown-container .dropdown-list .dropdown-item {
+  display: list-item;
+  list-style: none;
+  padding: var(--universal-margin);
+}
+
+.dropdown-container .dropdown-list .dropdown-item:hover {
+  background-color: var(--input-back-color);
+}

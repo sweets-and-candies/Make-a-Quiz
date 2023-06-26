@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-sm-11">
+    <forn [formGroup]="form">
+      <app-dropdown formControlName="category"
+        [options]="(categories$ | async) || []"
+        placeholder="Select category"
+        keyId="id"
+        keyLabel="name"
+        (selectedOption)="subcategories$.next($event?.subCategories)"
+      ></app-dropdown>
+      <ng-container *ngrxLet="subcategories$; let subcategories">
+        <app-dropdown formControlName="subcategory" *ngIf="subcategories?.length"
+          [options]="subcategories || []"
+          placeholder="Select subcategory"
+          keyId="id"
+          keyLabel="name"
+        ></app-dropdown>
+      </ng-container>
+      <select #difficulty id="difficultySelect" formControlName="difficulty">
+        <option value="null">Select difficulty</option>
+        <option>Easy</option>
+        <option>Medium</option>
+        <option>Hard</option>
+      </select>
+    </forn>
+    <button class="primary" id="createBtn" [disabled]="!(canCreateQuiz$ | async)" (click)="createQuiz()">Create</button>
+  </div>
+
+</div>
+<div class="row">
+   <app-quiz [questions]="questions$ | async" ></app-quiz>
+</div>

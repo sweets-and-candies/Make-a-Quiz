@@ -1,0 +1,12 @@
+<app-question *ngFor="let q of questionsWithAnswers; index as i; trackBy: trackBy" [question]="q.questionObject"
+              (change)="setAnswer(i, $event)">
+  <button *ngIf="canChangeQuestion"
+          class="inverse"
+          (click)="changeQuestion(i)"
+  >Change question</button>
+</app-question>
+<div>
+  <button class="inverse large" *ngIf="readyToSubmit" (click)="submit()">{{readyToSubmit}}
+    Submit
+  </button>
+</div>
